@@ -2,7 +2,7 @@
 
 Although I just added the first plugin, I like the idea of generating parts in inkscape. That's why I am positive, that it is not going to stay that lonely for long.
 
-Check out my blog for more information: [eeucalyptus.net](https://eeucaylptus.net)
+Check out my blog for more information: [eeucalyptus.net](https://eeucalyptus.net)
 
 ## Installation
 
