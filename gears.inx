@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
-  <_name>Generate gear</_name>
-  <id>net.eeucalyptus.inkscapegears</id>
-  <dependency type="executable" location="extensions">gears.py</dependency>
-  <dependency type="executable" location="extensions">inkex.py</dependency>
-  <param name="n" type="int" min="4	" max="1000"  _gui-text="Number of teeth">32</param>
-  <param name="width" type="float" _gui-text="Width per tooth">4</param>
-  <param name="halfdepth" type="float" _gui-text="Half-depth">1</param>
-  <param name="slope" type="float" _gui-text="Width of slope">1</param>
-  <effect>
-    <object-type>all</object-type>
-    <effects-menu>
-       <submenu _name="eeucalyptus"/>
-    </effects-menu>
-  </effect>
-  <script>
-    <command reldir="extensions" interpreter="python">gears.py</command>
-  </script>
+	<_name>Generate gear</_name>
+	<id>net.eeucalyptus.inkscapegears</id>
+	<dependency type="executable" location="extensions">gears.py</dependency>
+	<dependency type="executable" location="extensions">inkex.py</dependency>
+	<param name="n" type="int" min="4	" max="1000"  _gui-text="Number of teeth">32</param>
+	<param name="width" type="float" _gui-text="Width per tooth">4</param>
+	<param name="halfdepth" type="float" _gui-text="Half-depth">1</param>
+	<param name="slope" type="float" _gui-text="Width of slope">1</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+			<submenu _name="eeucalyptus"/>
+		</effects-menu>
+	</effect>
+	<script>
+		<command reldir="extensions" interpreter="python">gears.py</command>
+	</script>
 </inkscape-extension>

@@ -1,14 +1,6 @@
 #!/usr/bin/env python
 
-# These two lines are only needed if you don't put the script directly into
-# the installation directory
-import sys
-sys.path.append('/usr/share/inkscape/extensions')
-
-# We will use the inkex module with the predefined Effect base class.
 import inkex
-# The simplestyle module provides functions for style parsing.
-from simplestyle import *
 import simplestyle
 import math
 
@@ -57,33 +49,28 @@ class GearGeneratorEffect(inkex.Effect):
     Creates new layer with a gear
     """
     def __init__(self):
-        """
-        Constructor.
-        Defines the "--what" option of a script.
-        """
-        # Call the base class constructor.
         inkex.Effect.__init__(self)
         
-        # Define string option "--what" with "-w" shortcut and default value "World".
-        self.OptionParser.add_option('-n', '--n', action = 'store',
-          type = 'int', dest = 'n', default = 32,
-          help = 'Number of teeth')
-        self.OptionParser.add_option('-w', '--width', action = 'store',
-          type = 'float', dest = 'width', default = 4,
-          help = 'Width per tooth')
-        self.OptionParser.add_option('-d', '--halfdepth', action = 'store',
-          type = 'float', dest = 'halfdepth', default = 1,
-          help = 'Half-depth')
-        self.OptionParser.add_option('-s', '--slope', action = 'store',
-          type = 'float', dest = 'slope', default = 1,
-          help = 'Width of slope')
+        # Parse parameters from GUI
+        self.OptionParser.add_option(
+            '-n', '--n', action = 'store',
+            type = 'int', dest = 'n', default = 32,
+            help = 'Number of teeth')
+        self.OptionParser.add_option(
+            '-w', '--width', action = 'store',
+            type = 'float', dest = 'width', default = 4,
+            help = 'Width per tooth')
+        self.OptionParser.add_option(
+            '-d', '--halfdepth', action = 'store',
+            type = 'float', dest = 'halfdepth', default = 1,
+            help = 'Half-depth')
+        self.OptionParser.add_option(
+            '-s', '--slope', action = 'store',
+            type = 'float', dest = 'slope', default = 1,
+            help = 'Width of slope')
 
     def effect(self):
-        """
-        Effect behaviour.
-        Overrides base class' method and inserts gear into SVG document.
-        """
-        # Get script's "--what" option value
+        # Get gear parameters from options
         n = self.options.n
         tooth_width = self.options.width
         halfdepth = self.options.halfdepth
@@ -115,6 +102,6 @@ class GearGeneratorEffect(inkex.Effect):
             
         path = inkex.etree.SubElement(layer, inkex.addNS('path','svg'), attribs )
         
-# Create effect instance and apply it.
+# Execute effect
 effect = GearGeneratorEffect()
 effect.affect()
