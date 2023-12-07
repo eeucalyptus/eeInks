@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import inkex
 import simplestyle
 import math
@@ -52,21 +50,21 @@ class GearGeneratorEffect(inkex.Effect):
         inkex.Effect.__init__(self)
         
         # Parse parameters from GUI
-        self.OptionParser.add_option(
+        self.arg_parser.add_argument(
             '-n', '--n', action = 'store',
-            type = 'int', dest = 'n', default = 32,
+            type = int, dest = 'n', default = 32,
             help = 'Number of teeth')
-        self.OptionParser.add_option(
+        self.arg_parser.add_argument(
             '-w', '--width', action = 'store',
-            type = 'float', dest = 'width', default = 4,
+            type = float, dest = 'width', default = 4,
             help = 'Width per tooth')
-        self.OptionParser.add_option(
+        self.arg_parser.add_argument(
             '-d', '--halfdepth', action = 'store',
-            type = 'float', dest = 'halfdepth', default = 1,
+            type = float, dest = 'halfdepth', default = 1,
             help = 'Half-depth')
-        self.OptionParser.add_option(
+        self.arg_parser.add_argument(
             '-s', '--slope', action = 'store',
-            type = 'float', dest = 'slope', default = 1,
+            type = float, dest = 'slope', default = 1,
             help = 'Width of slope')
 
     def effect(self):
@@ -80,14 +78,17 @@ class GearGeneratorEffect(inkex.Effect):
         svg = self.document.getroot()
 
         # Create a new layer.
-        layer = inkex.etree.SubElement(svg, 'g')
+        layer = svg.add(inkex.elements.Group.new('g', is_layer=True))
         layer.set(inkex.addNS('label', 'inkscape'), 'gear layer')
         layer.set(inkex.addNS('groupmode', 'inkscape'), 'layer')
         
+        my_shape = inkex.elements.PathElement()
         points = generate_teeth(tooth_width = tooth_width, slope_width = slope, halfdepth = halfdepth, n_teeth = n)
         
         svg_pts = " ".join([(lambda x,y: "{:0.3f},{:1.3f}".format(x, y))(x, y) for x,y in points])
         
+        my_shape.path = "M " + svg_pts + " Z"
+
         style = {   'stroke'        : 'none',
                 'stroke-width'  : '1',
                 'fill'          : '#000000'
@@ -99,9 +100,9 @@ class GearGeneratorEffect(inkex.Effect):
                 'width'     : "20",
                 'd'         : "M " + svg_pts + " Z",
             }
-            
-        path = inkex.etree.SubElement(layer, inkex.addNS('path','svg'), attribs )
+
+        layer.append(my_shape)  
         
 # Execute effect
 effect = GearGeneratorEffect()
-effect.affect()
+effect.run()

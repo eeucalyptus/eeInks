@@ -3,7 +3,6 @@
 	<_name>Generate gear</_name>
 	<id>net.eeucalyptus.inkscapegears</id>
 	<dependency type="executable" location="extensions">gears.py</dependency>
-	<dependency type="executable" location="extensions">inkex.py</dependency>
 	<param name="n" type="int" min="4	" max="1000"  _gui-text="Number of teeth">32</param>
 	<param name="width" type="float" _gui-text="Width per tooth">4</param>
 	<param name="halfdepth" type="float" _gui-text="Half-depth">1</param>
